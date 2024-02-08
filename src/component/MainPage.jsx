@@ -1,9 +1,12 @@
 import ChatInput from "./ChatInput";
+import SideBar from "./SideBar";
 
 const MainPage = ()=>{
     return(
         <>
-        <div>
+        <SideBar></SideBar>
+        <div className="chatSection">
+                    <div>
             로고
             텍스트
         </div>
@@ -14,6 +17,7 @@ const MainPage = ()=>{
             <div>4</div>
         </div>
         <ChatInput></ChatInput>
+        </div>
         </>
     )
 }

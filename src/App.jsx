@@ -1,15 +1,16 @@
-import MainPage from "./component/MainPage";
-import SideBar from "./component/SideBar";
+
+import { Route, Routes } from 'react-router-dom';
 import './App.css'
+import MainPage from './component/MainPage';
+import ChatPage from './component/ChatPage';
 
 const App=()=>{
   return(
     <>
-      <SideBar></SideBar>
-      <div className="mainPage">
-        <MainPage></MainPage>
-      </div>
-      
+      <Routes>
+        <Route path='/' Component={MainPage}/>
+        <Route path='/chat/' Component={ChatPage}/>       
+      </Routes>
     </>
   )
 }
