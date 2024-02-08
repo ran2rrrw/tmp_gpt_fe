@@ -1,5 +1,7 @@
 #root{
     display: flex;
+    margin: 0;
+    padding: 0;
 }
 .sideBar{
     width: 200px;
@@ -8,10 +10,12 @@
     color: white;
     flex-shrink: 0;
 }
-.mainPage{
+.chatSection{
     display: flex;
+    overflow: hidden;
+    position:relative;
     flex-direction: column;
-    flex-grow:1;
+    flex: 1 1 auto;
 }
 .chatInput{
     display: flex;

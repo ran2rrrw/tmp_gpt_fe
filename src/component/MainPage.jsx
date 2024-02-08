@@ -4,7 +4,6 @@ import SideBar from "./SideBar";
 const MainPage = ()=>{
     return(
         <>
-        <SideBar></SideBar>
         <div className="chatSection">
                     <div>
             로고

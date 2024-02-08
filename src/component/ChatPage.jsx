@@ -7,7 +7,6 @@ const ChatPage = ()=>{
     
     return(
         <>
-        <SideBar></SideBar>
         <div className="chatSection">
             <ChatMessage></ChatMessage>
             <ChatInput></ChatInput>

@@ -32,11 +32,11 @@ const LogList = ()=>{
 
     return(
         <div className="logList">
-            {logList.map((log, index) =>(
-                <div key={index} onClick={()=>handleClick(index)}>
+            {logList.map((log) =>(
+                <div key={log.roomId} onClick={()=>handleClick(log.roomId)}>
                     <span>{log.roomName}</span>
-                    {activeIndex===index && <img src={moreImage} onClick={(e)=>handelMoreClick(index, e)}></img>}
-                    {activeMoreIndex===index &&  <ul><ListMenu></ListMenu></ul>} 
+                    {activeIndex===log.roomId && <img src={moreImage} onClick={(e)=>handelMoreClick(log.roomId, e)}></img>}
+                    {activeMoreIndex===log.roomId &&  <ul><ListMenu></ListMenu></ul>} 
                 </div> 
             ))}
         </div>
