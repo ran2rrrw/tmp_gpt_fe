@@ -1,10 +1,11 @@
 import newChatImg from '../assets/pencil-square.svg'
 import chatIcon from '../assets/ChatGPT.svg'
+import { Link } from 'react-router-dom';
 
 const NewChat = ()=>{
-
+    
     return(
-        <a className='newChatBlock'>
+        <Link to='/' className='newChatBlock'>
             <div className="chatIcon">
                 <img src={chatIcon} alt="" />
             </div>
@@ -14,7 +15,7 @@ const NewChat = ()=>{
             <div className="newChatImg">
                 <img src={newChatImg} alt="" />
             </div>
-        </a>
+        </Link>
     )
 }
 export default NewChat;

@@ -10,8 +10,8 @@ const App=()=>{
     <>
       <SideBar></SideBar>
       <Routes>
-        <Route path='/' Component={MainPage}/>
-        <Route path='/chat/*' Component={ChatPage}/>       
+        <Route path='/' element={<MainPage />}/>
+        <Route path='/chat/:roomId' element={<ChatPage />}/>       
       </Routes>
     </>
   )

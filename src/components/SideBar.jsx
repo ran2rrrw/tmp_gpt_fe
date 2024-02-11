@@ -8,12 +8,7 @@ const SideBar = ()=>{
     return(
         <div className="sideBar">
             <NewChat></NewChat>
-
-           
             <RoomList></RoomList>
-            
-
-
             <Profile></Profile>
         </div>
 

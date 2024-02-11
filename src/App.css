@@ -41,6 +41,9 @@ body{
 .newChatText{
     width: 140px;
 }
+.sideBar a:hover{
+    color: #ffffff;
+}
 .roomList{
     display: flex;
     flex-direction: column;

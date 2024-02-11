@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 import { DashOutlined } from '@ant-design/icons';
-import { Dropdown, message, Space, Menu } from 'antd';
+import { Dropdown, Space, Menu, message} from 'antd';
 import axios from "axios";
 import shareImg from '../assets/upload.svg';
 import renameImg from '../assets/pencil.svg';
 import deleteImg from '../assets/trash3.svg';
+import { useNavigate } from "react-router";
 
 const RoomList = ()=>{
     
@@ -24,16 +25,18 @@ const RoomList = ()=>{
     useEffect(()=>{
         axios.get('http://localhost:4000/posts')
         .then(res=>{
-            console.log(res.data)
             setRoomList(res.data)
         })
-    })
+    }, []);
 
     const onClick = ({ key }) => {
         message.info(`Click on item ${key}`);
     };
 
-
+    const navigate = useNavigate();
+    const handleRoom=(id)=>{
+        navigate('http://localhost:5173/chat/'+id)
+    }
 
     const menu = (
         <Menu onClick={onClick}>
@@ -43,32 +46,29 @@ const RoomList = ()=>{
           <Menu.Item key="2" icon={<img src={renameImg} alt="rename Image" />} >
             Rename
           </Menu.Item>
-          <Menu.Item key="2" icon={<img src={deleteImg} alt="delete Image" />} >
+          <Menu.Item key="3" icon={<img src={deleteImg} alt="delete Image" />} >
             Delete chat
           </Menu.Item>
         </Menu>
-      )
+      );
 
 
 
     return(
         <div className="roomList">
             {roomList.map(room=>(
-                <Dropdown
-                menu={menu}
-                key={room.id}  
-                >
-                    <a onClick={(e)=>{e.preventDefault}}>
-                    <Space className="roomTitle">
-                    {room.title}
-                    <DashOutlined />
-                    </Space>
-                    </a>
-                </Dropdown>
+                <div className="room" key={room.id} >
+                    <Dropdown overlay={menu}>
+                        <a onClick={(e)=>{e.preventDefault}}>
+                        <Space className="roomTitle" onClick={()=>{handleRoom(room.id)}}>
+                        {room.msg}
+                        <DashOutlined />
+                        </Space>
+                        </a>
+                    </Dropdown>
+                </div>
             ))}
-        </div>
-
-         
+        </div>     
     )
 }
 export default RoomList;
