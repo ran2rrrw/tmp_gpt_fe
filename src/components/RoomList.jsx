@@ -35,7 +35,7 @@ const RoomList = ()=>{
 
     const navigate = useNavigate();
     const handleRoom=(id)=>{
-        navigate('http://localhost:5173/chat/'+id)
+        navigate('/chat/'+id)
     }
 
     const menu = (

@@ -11,7 +11,7 @@ const App=()=>{
       <SideBar></SideBar>
       <Routes>
         <Route path='/' element={<MainPage />}/>
-        <Route path='/chat/:roomId' element={<ChatPage />}/>       
+        <Route path='/chat/:id' element={<ChatPage />}/>       
       </Routes>
     </>
   )

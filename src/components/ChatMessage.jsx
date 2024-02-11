@@ -1,15 +1,22 @@
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import UserOutlined from '@ant-design/icons';
 
-const ChatMessage = (roomId)=>{
+const ChatMessage = (props)=>{
 
-    const [messages, setMessages]=useState([
-        axios.get(`https://localhost:4000/posts/${roomId}`)
+    const [messages, setMessages]=useState([])
+
+    useEffect(()=>{
+        console.log(props.roomId)
+        axios.get('http://localhost:4000/posts/'+props.roomId)
         .then(res=>{
+            console.log(res.data)
             setMessages(res.data)
         })
-    ])
+        .catch(error=>{
+            console.error('Error fetching data:', error);
+        })
+    },[props.roomId]);
 
     return(
         <div className="messages">

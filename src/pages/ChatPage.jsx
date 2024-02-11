@@ -1,23 +1,14 @@
 import ChatMessage from "../components/ChatMessage";
 import ChatInput from "../components/ChatInput";
 import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 
 const ChatPage = ()=>{
     const [roomId, setRoomId]=useState(0);
-
+    const {id}=useParams();
     useEffect(()=>{
-        const url = window.location.pathname;
-        const numberPattern = /\d+/g;
-        const matches = url.match(numberPattern);
-        const roomIds = [];
-    
-        if(matches){
-            matches.forEach(match=>{
-               roomIds.push(match) 
-            })
-
-        }
-        setRoomId(roomIds.join(''))
+        console.log(id)
+        setRoomId(id)
     }, []);
 
     return(
