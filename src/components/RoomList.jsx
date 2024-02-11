@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import { DashOutlined } from '@ant-design/icons';
 import { Dropdown, message, Space, Menu } from 'antd';
+import {useNavigate} from 'react-router-dom';
 import axios from "axios";
 import shareImg from '../assets/upload.svg';
 import renameImg from '../assets/pencil.svg';
 import deleteImg from '../assets/trash3.svg';
-
 
 const RoomList = ()=>{
     
@@ -34,6 +34,8 @@ const RoomList = ()=>{
         message.info(`Click on item ${key}`);
     };
 
+
+
     const menu = (
         <Menu onClick={onClick}>
           <Menu.Item key="1" icon={<img src={shareImg} alt="share Image" />} >
@@ -57,7 +59,7 @@ const RoomList = ()=>{
                 overlay={menu}
                 key={room.id}  
                 >
-                    <a onClick={(e) => e.preventDefault()}>
+                    <a onClick={(e)=>{e.preventDefault}}>
                     <Space className="roomTitle">
                     {room.title}
                     <DashOutlined />
