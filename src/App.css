@@ -1,99 +1,94 @@
-#root{
+body{
     display: flex;
-    margin: 0;
-    padding: 0;
+}
+#root{
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
 }
 .sideBar{
-    width: 200px;
+    width: 260px;
     height: 100vh;
-    background-color: black;
-    color: white;
-    flex-shrink: 0;
+    background-color: #000000;
+    padding: 13px 5px;
 }
 .chatSection{
+    width: 100%;
+    height: 100vh;
+    flex-grow: 1;
     display: flex;
-    overflow: hidden;
-    position:relative;
     flex-direction: column;
-    flex: 1 1 auto;
+    justify-content: flex-end;
+    align-items: center;
+}
+.newChatBlock{
+    width: 212px;
+    height: 40px;
+    padding: 0 8px;
+    color: #ffffff;
+    display: flex;
+    justify-content: space-around;
+}
+.chatIcon{
+    width: 28px;
+    height: 28px;
+    background-color: #ffffff;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    margin-right: 5px;
+}
+.newChatText{
+    width: 140px;
+}
+.roomList{
+    display: flex;
+    flex-direction: column;
+}
+.roomTitle{
+    color: #ffffff;
+    display: flex;
+    justify-content: space-between;
+    padding: 5px;
+}
+
+.profileBlock{
+    width: 220px;
+    height: 32px;
+    padding: 8px 8px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    color: #ffffff;
+    position: fixed;
+    bottom: 0;
+}
+.profileImg{
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background-color: #ffffff;
+    margin-right: 8px;
 }
 .chatInput{
     display: flex;
-    border:0;
-    border-radius: 10px;
-    max-height: 40px;
-    flex-shrink: 0;
-    flex-grow: 1;
-    justify-content: center;
     align-items: center;
-    padding: 10px;
-    margin: 5px 0;
-    border: 1px solid #ccc;
-
+    max-width: 700px;
+    min-width: 700px;
+    padding: 14px 0;
 }
-.chatInput textarea{
-    font-family: 'Courier New', Courier, monospace;
-    font-size: 14px;
-    color: #000;
-    width: 100%;
-    flex:1;
-    max-width: 600px;
-    height: 40px;
-    border: none;
-    outline: none;
-    resize: none;
-
+.chatInput TextArea{
+    border-color: #ffffff;
 }
-.chatInput button{
-    width: 20px;
-    height: 20px;
-    display: block;
-    background-color: #e4e3e3;
+.submitButton{
+    width: 24px;
+    height: 24px;
+    padding: 4px;
+    background-color: #e3e3e3;
     display: flex;
     justify-content: center;
-    align-items: center;
 }
-.messages{
-    max-height: 300px;
-    overflow-y: auto;
-}
-.messages div{
-    margin-bottom: 5px;
-    padding:8px 12px;
-}
-.newChatBlock{
-    width: 200px;
-    display: flex;
-    justify-content: flex-start;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    padding-left: 10px;
-}
-.newChatText{
-    width: 100px;
-    margin-left: 15px;
-    margin-right: 20px;
-    font-size: 12px;
-}
-.profileBlock{
-    width: 200px;
-    display: flex;
-    justify-content: flex-start;
-    position: fixed;
-    bottom: 0;
-    padding-left: 10px;
-    padding-bottom: 10px;
-}
-.userName{
-    margin-left: 10px;
-}
-.logList{
-    width: 190px;
-    padding-left: 10px;
-}
-.logList img {
-    padding: 0 5px;
-}
-ul{
-    list-style-type: none;
+.submitButton img{
+    width: 18px;
+    height: 18px;
 }

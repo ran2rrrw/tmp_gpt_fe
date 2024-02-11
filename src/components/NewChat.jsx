@@ -1,12 +1,12 @@
 import newChatImg from '../assets/pencil-square.svg'
+import chatIcon from '../assets/ChatGPT.svg'
+
 const NewChat = ()=>{
 
     return(
-        <div className="newChatBlock">
+        <a className='newChatBlock'>
             <div className="chatIcon">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-circle-fill" viewBox="0 0 16 16">
-                    <circle cx="8" cy="8" r="8"/>
-                </svg>
+                <img src={chatIcon} alt="" />
             </div>
             <div className="newChatText">
                 New chat
@@ -14,7 +14,7 @@ const NewChat = ()=>{
             <div className="newChatImg">
                 <img src={newChatImg} alt="" />
             </div>
-        </div>
+        </a>
     )
 }
 export default NewChat;

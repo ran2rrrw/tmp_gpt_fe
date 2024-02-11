@@ -1,9 +1,9 @@
 
 import { Route, Routes } from 'react-router-dom';
 import './App.css'
-import MainPage from './component/MainPage';
-import ChatPage from './component/ChatPage';
-import SideBar from './component/SideBar';
+import MainPage from './pages/MainPage';
+import ChatPage from './pages/ChatPage';
+import SideBar from './components/SideBar';
 
 const App=()=>{
   return(

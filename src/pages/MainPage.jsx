@@ -1,5 +1,5 @@
-import ChatInput from "./ChatInput";
-import SideBar from "./SideBar";
+import ChatInput from "../components/ChatInput";
+import SideBar from "../components/SideBar";
 
 const MainPage = ()=>{
     return(

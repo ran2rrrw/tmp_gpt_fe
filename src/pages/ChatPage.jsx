@@ -1,6 +1,6 @@
-import ChatMessage from "./ChatMessage";
-import ChatInput from "./ChatInput";
-import SideBar from './SideBar';
+import ChatMessage from "../components/ChatMessage";
+import ChatInput from "../components/ChatInput";
+import SideBar from '../components/SideBar';
 
 
 const ChatPage = ()=>{

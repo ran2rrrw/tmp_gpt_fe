@@ -1,17 +1,13 @@
+import axios from "axios";
 import { useState } from "react";
 
 const ChatMessage = ()=>{
 
     const [messages, setMessages]=useState([
-        {
-            text:"메시지"
-        },
-        {
-            text:"메시지2"
-        },
-        {
-            text:"메시지3"
-        }
+        axios.get('https://localhost:4000/posts')
+        .then(res=>{
+            setMessages(res.data.msg)
+        })
     ])
 
     return(

@@ -1,13 +1,18 @@
-import LogList from "./LogList";
+import RoomList from "./RoomList";
 import NewChat from "./NewChat"
 import Profile from "./Profile";
 
 const SideBar = ()=>{
+
+    
     return(
         <div className="sideBar">
             <NewChat></NewChat>
 
-            <LogList></LogList>
+           
+            <RoomList></RoomList>
+            
+
 
             <Profile></Profile>
         </div>
