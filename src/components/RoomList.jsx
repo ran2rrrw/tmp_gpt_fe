@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { DashOutlined } from '@ant-design/icons';
 import { Dropdown, message, Space, Menu } from 'antd';
-import {useNavigate} from 'react-router-dom';
 import axios from "axios";
 import shareImg from '../assets/upload.svg';
 import renameImg from '../assets/pencil.svg';
@@ -56,7 +55,7 @@ const RoomList = ()=>{
         <div className="roomList">
             {roomList.map(room=>(
                 <Dropdown
-                overlay={menu}
+                menu={menu}
                 key={room.id}  
                 >
                     <a onClick={(e)=>{e.preventDefault}}>
