@@ -7,10 +7,8 @@ const ChatMessage = (props)=>{
     const [messages, setMessages]=useState([])
 
     useEffect(()=>{
-        console.log(props.roomId)
-        axios.get('http://localhost:4000/posts/'+props.roomId)
+        axios.get('http://192.168.0.4:9191/tmpgpt/api/rooms/'+props.roomId+'/chat')
         .then(res=>{
-            console.log(res.data)
             setMessages(res.data)
         })
         .catch(error=>{

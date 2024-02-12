@@ -9,21 +9,10 @@ import { useNavigate } from "react-router";
 
 const RoomList = ()=>{
     
-    const [roomList, setRoomList]=useState([
-        {
-            "id":1,
-            "title":"testtitle",
-            "views":100
-        },
-        {
-            "id":22,
-            "title":"testtitle22",
-            "views":200
-        }
-    ]);
+    const [roomList, setRoomList]=useState([]);
 
     useEffect(()=>{
-        axios.get('http://localhost:4000/posts')
+        axios.get('http://192.168.0.4:9191/tmpgpt/api/rooms')
         .then(res=>{
             setRoomList(res.data)
         })
@@ -57,11 +46,11 @@ const RoomList = ()=>{
     return(
         <div className="roomList">
             {roomList.map(room=>(
-                <div className="room" key={room.id} >
+                <div className="room" key={room.roomId} >
                     <Dropdown overlay={menu}>
                         <a onClick={(e)=>{e.preventDefault}}>
-                        <Space className="roomTitle" onClick={()=>{handleRoom(room.id)}}>
-                        {room.msg}
+                        <Space className="roomTitle" onClick={()=>{handleRoom(room.roomId)}}>
+                        {room.roomName}
                         <DashOutlined />
                         </Space>
                         </a>

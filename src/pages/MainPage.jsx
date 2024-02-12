@@ -1,9 +1,11 @@
+import { useState } from "react";
 import ChatInput from "../components/ChatInput";
 import SideBar from "../components/SideBar";
 
 const MainPage = ()=>{
     return(
         <>
+        <SideBar></SideBar>
         <div className="chatSection">
                     <div>
             로고
