@@ -95,3 +95,34 @@ body{
     width: 18px;
     height: 18px;
 }
+.messages{
+    width:100%;
+    overflow-y: auto;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.message{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 720px;
+    padding: 0 20px;
+    font-size: 1rem;
+    line-height: 1.5rem;
+}
+.userName{
+    display: flex;
+    justify-content: flex-start;
+}
+.userImg{
+    width: 24px;
+    height: 24px;
+}
+.userText{
+    margin-left: 5px;
+    font-weight: 600;
+}
+
+

@@ -10,6 +10,17 @@ import { useNavigate } from "react-router";
 const RoomList = ()=>{
     
     const [roomList, setRoomList]=useState([]);
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const showModal = () => {
+      setIsModalOpen(true);
+    };
+    const handleOk = ({key}) => {
+      setIsModalOpen(false);
+      axios.delete('http://192.168.0.4:9191/tmpgpt/api/rooms'+key)
+    };
+    const handleCancel = () => {
+      setIsModalOpen(false);
+    };
 
     useEffect(()=>{
         axios.get('http://192.168.0.4:9191/tmpgpt/api/rooms')
@@ -35,7 +46,7 @@ const RoomList = ()=>{
           <Menu.Item key="2" icon={<img src={renameImg} alt="rename Image" />} >
             Rename
           </Menu.Item>
-          <Menu.Item key="3" icon={<img src={deleteImg} alt="delete Image" />} >
+          <Menu.Item key="3" icon={<img src={deleteImg} alt="delete Image" /> } onClick={showModal}>
             Delete chat
           </Menu.Item>
         </Menu>
@@ -55,6 +66,9 @@ const RoomList = ()=>{
                         </Space>
                         </a>
                     </Dropdown>
+                    <Modal title="Delete Chat?" open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
+                        <p>This will delete {room.roomName}</p>
+                    </Modal>
                 </div>
             ))}
         </div>     
