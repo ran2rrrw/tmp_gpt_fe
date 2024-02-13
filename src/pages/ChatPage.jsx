@@ -5,13 +5,12 @@ import { useNavigate, useParams } from 'react-router-dom';
 import SideBar from '../components/SideBar';
 import axios from 'axios';
 
-axios.defaults.baseURL = 'http://localhost:9191/tmpgpt/api/rooms';
+//axios.defaults.baseURL = 'http://localhost:9191/tmpgpt/api/rooms';
+axios.defaults.baseURL = 'http://192.168.0.148:9191/tmpgpt/api/rooms';
 
 const ChatPage = () => {
   const [roomId, setRoomId] = useState('');
   const [messages, setMessages] = useState([]);
-  const [postData, setPostData] = useState('');
-  const navigate = useNavigate();
   const { id } = useParams();
 
   useEffect(() => {
@@ -24,32 +23,22 @@ const ChatPage = () => {
       .catch((error) => {
         console.error('Error fetching data:', error);
       });
-  }, [id]);
+  }, [id, messages]);
 
-  const post = (newData) => {
-    setPostData(newData);
-    if (id === 0) {
-      axios.post('', {
-        roomName: postData,
-      });
-      axios.get('/last').then((res) => {
-        setRoomId(res.data);
-      });
-      navigate('/chat/' + roomId);
-    }
+  const post = async (newData) => {
     try {
-      axios.post('/' + roomId + '/chat', {
-        msg: postData,
+      await axios.post('/' + roomId + '/chat', {
+        msg: newData,
         writer: 'me',
         roomId: roomId,
       });
-      axios.get().then((res) => {
+      await axios.get().then((res) => {
         setMessages(res.data);
       });
     } catch (error) {
       console.error('Error adding data:', error);
     }
-  };
+  }
 
   return (
     <>
@@ -61,4 +50,5 @@ const ChatPage = () => {
     </>
   );
 };
+
 export default ChatPage;

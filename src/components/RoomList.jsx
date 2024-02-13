@@ -7,7 +7,8 @@ import renameImg from '../assets/pencil.svg';
 import deleteImg from '../assets/trash3.svg';
 import { useNavigate } from 'react-router';
 
-axios.defaults.baseURL = 'http://localhost:9191/tmpgpt/api/rooms';
+//axios.defaults.baseURL = 'http://localhost:9191/tmpgpt/api/rooms';
+axios.defaults.baseURL = 'http://192.168.0.148:9191/tmpgpt/api/rooms';
 
 const RoomList = () => {
   const [roomList, setRoomList] = useState([]);
@@ -15,10 +16,11 @@ const RoomList = () => {
   const showModal = () => {
     setIsModalOpen(true);
   };
-  const handleOk = ({ key }) => {
+  const handleOk = (e) => {
+    console.log(e);
     setIsModalOpen(false);
-    console.log('What key ? ' + key);
-    axios.delete('/' + key);
+    console.log('What key ? ' + e.key);
+    axios.delete('/' + e.key);
   };
   const handleCancel = () => {
     setIsModalOpen(false);
@@ -79,6 +81,7 @@ const RoomList = () => {
             </a>
           </Dropdown>
           <Modal
+            key={room.roomId}
             title="Delete Chat?"
             open={isModalOpen}
             onOk={handleOk}
