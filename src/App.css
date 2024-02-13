@@ -134,6 +134,7 @@ body{
 .userName{
     display: flex;
     justify-content: flex-start;
+    padding: 5px 0;
 }
 .userImg{
     width: 24px;
@@ -145,5 +146,6 @@ body{
 }
 .msg{
     white-space: pre-line;
+    padding: 5px 0;
 }
 
