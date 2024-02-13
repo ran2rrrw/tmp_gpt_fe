@@ -1,25 +1,21 @@
-import { useState } from "react";
-import ChatInput from "../components/ChatInput";
-import SideBar from "../components/SideBar";
+import ChatInput from '../components/ChatInput';
+import SideBar from '../components/SideBar';
 
-const MainPage = ()=>{
-    return(
-        <>
-        <SideBar></SideBar>
-        <div className="chatSection">
-                    <div>
-            로고
-            텍스트
-        </div>
+const MainPage = () => {
+  return (
+    <>
+      <SideBar></SideBar>
+      <div className="chatSection">
+        <div>로고 텍스트</div>
         <div>
-            <div>1</div>
-            <div>2</div>
-            <div>3</div>
-            <div>4</div>
+          <div>1</div>
+          <div>2</div>
+          <div>3</div>
+          <div>4</div>
         </div>
-        <ChatInput></ChatInput>
-        </div>
-        </>
-    )
-}
+        <ChatInput />
+      </div>
+    </>
+  );
+};
 export default MainPage;
