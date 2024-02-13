@@ -6,6 +6,7 @@ import shareImg from '../assets/upload.svg';
 import renameImg from '../assets/pencil.svg';
 import deleteImg from '../assets/trash3.svg';
 import { useNavigate } from 'react-router';
+import Input from 'rc-input';
 
 //axios.defaults.baseURL = 'http://localhost:9191/tmpgpt/api/rooms';
 axios.defaults.baseURL = 'http://192.168.0.148:9191/tmpgpt/api/rooms';
@@ -52,6 +53,23 @@ const RoomList = () => {
   const navigate = useNavigate();
   const handleRoom = (id) => {
     navigate('/chat/' + id);
+  };
+
+  const handleRename = (roomId, newName) => {
+    // 서버로 새로운 방 이름을 전송하여 업데이트
+    axios.patch(`/rooms/${roomId}`, { roomName: newName })
+      .then(() => {
+        // 방 이름이 성공적으로 업데이트되면 해당 방의 이름을 새로운 이름으로 변경
+        setRoomList(roomList.map(room => {
+          if (room.roomId === roomId) {
+            return { ...room, roomName: newName };
+          }
+          return room;
+        }));
+      })
+      .catch(error => {
+        console.error('Error updating room name:', error);
+      });
   };
 
   // const menu = (
@@ -104,7 +122,7 @@ const RoomList = () => {
                   handleRoom(room.roomId);
                 }}
               >
-                {room.roomName}
+               <EditableRoomName room={room} onRename={handleRename}></EditableRoomName>
                 <DashOutlined />
               </Space>
             </a>
@@ -120,6 +138,52 @@ const RoomList = () => {
         </div>
       ))}
     </div>
+  );  
+};
+
+const EditableRoomName = ({ room, onRename }) => {
+  const [editing, setEditing] = useState(false);
+  const [newName, setNewName] = useState(room.roomName);
+
+  const handleInputChange = (event) => {
+    setNewName(event.target.value);
+  };
+
+  const handleKeyPress = (event) => {
+    if (event.key === 'Enter') {
+      saveChanges();
+    }
+  };
+
+  const saveChanges = () => {
+    if (newName.trim() === '') {
+      // 방 이름이 비어있으면 수정할 수 없음
+      return;
+    }
+    setEditing(false);
+    onRename(room.roomId, newName);
+  };
+
+  return (
+    <>
+      {editing ? (
+        <Input
+          value={newName}
+          onChange={handleInputChange}
+          onBlur={saveChanges}
+          onKeyPress={handleKeyPress}
+          autoFocus
+        />
+      ) : (
+        <span
+          onClick={() => setEditing(true)}
+          style={{ cursor: 'pointer' }}
+        >
+          {room.roomName}
+        </span>
+      )}
+    </>
   );
 };
+
 export default RoomList;
