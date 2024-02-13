@@ -12,23 +12,36 @@ axios.defaults.baseURL = 'http://192.168.0.148:9191/tmpgpt/api/rooms';
 
 const RoomList = () => {
   const [roomList, setRoomList] = useState([]);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const showModal = () => {
-    setIsModalOpen(true);
+  const [modalStates, setModalStates] = useState({});
+
+  const showModal = (roomId) => {
+    setModalStates({ ...modalStates, [roomId]: true });
   };
-  const handleOk = (e) => {
-    console.log(e);
-    setIsModalOpen(false);
-    console.log('What key ? ' + e.key);
-    axios.delete('/' + e.key);
+  
+  const handleOk = (roomId) => {
+    axios.delete('/' + roomId)
+    .then(()=>{
+      setRoomList(roomList.filter(room => room.roomId !== roomId));
+      setModalStates({ ...modalStates, [roomId]: false });
+    })
+    .catch(error => {
+      console.error('Error deleting room:', error);
+    });
+    navigate('/')
   };
-  const handleCancel = () => {
-    setIsModalOpen(false);
+
+  const handleCancel = (roomId) => {
+    setModalStates({ ...modalStates, [roomId]: false });
   };
 
   useEffect(() => {
     axios.get().then((res) => {
       setRoomList(res.data);
+      const initialModalStates = res.data.reduce((acc, room) => {
+        acc[room.roomId] = false;
+        return acc;
+      }, {});
+      setModalStates(initialModalStates);
     });
   }, []);
 
@@ -41,29 +54,45 @@ const RoomList = () => {
     navigate('/chat/' + id);
   };
 
-  const menu = (
-    <Menu onClick={onClick}>
-      <Menu.Item key="1" icon={<img src={shareImg} alt="share Image" />}>
-        Share
-      </Menu.Item>
-      <Menu.Item key="2" icon={<img src={renameImg} alt="rename Image" />}>
-        Rename
-      </Menu.Item>
-      <Menu.Item
-        key="3"
-        icon={<img src={deleteImg} alt="delete Image" />}
-        onClick={showModal}
-      >
-        Delete chat
-      </Menu.Item>
-    </Menu>
-  );
+  // const menu = (
+  //   <Menu onClick={onClick}>
+  //     <Menu.Item key="1" icon={<img src={shareImg} alt="share Image" />}>
+  //       Share
+  //     </Menu.Item>
+  //     <Menu.Item key="2" icon={<img src={renameImg} alt="rename Image" />}>
+  //       Rename
+  //     </Menu.Item>
+  //     <Menu.Item
+  //       key="3"
+  //       icon={<img src={deleteImg} alt="delete Image" />}
+  //       onClick={showModal}
+  //     >
+  //       Delete chat
+  //     </Menu.Item>
+  //   </Menu>
+  // );
 
   return (
     <div className="roomList">
       {roomList.map((room) => (
         <div className="room" key={room.roomId}>
-          <Dropdown overlay={menu}>
+          <Dropdown overlay={
+                <Menu onClick={onClick}>
+                <Menu.Item key="1" icon={<img src={shareImg} alt="share Image" />}>
+                  Share
+                </Menu.Item>
+                <Menu.Item key="2" icon={<img src={renameImg} alt="rename Image" />}>
+                  Rename
+                </Menu.Item>
+                <Menu.Item
+                  key="3"
+                  icon={<img src={deleteImg} alt="delete Image" />}
+                  onClick={()=>{showModal(room.roomId)}}
+                >
+                  Delete chat
+                </Menu.Item>
+              </Menu>
+          }>
             <a
               onClick={(e) => {
                 e.preventDefault;
@@ -81,11 +110,10 @@ const RoomList = () => {
             </a>
           </Dropdown>
           <Modal
-            key={room.roomId}
             title="Delete Chat?"
-            open={isModalOpen}
-            onOk={handleOk}
-            onCancel={handleCancel}
+            visible={modalStates[room.roomId]}
+            onOk={()=>{handleOk(room.roomId)}}
+            onCancel={()=>{handleCancel(room.roomId)}}
           >
             <p>This will delete {room.roomName}</p>
           </Modal>
