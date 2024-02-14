@@ -11,6 +11,7 @@ axios.defaults.baseURL = 'http://192.168.0.148:9191/tmpgpt/api/rooms';
 const ChatPage = () => {
   const [roomId, setRoomId] = useState('');
   const [messages, setMessages] = useState([]);
+  const [updateSwitch, setUpdateSwitch] = useState(false);
   const { id } = useParams();
 
   useEffect(() => {
@@ -23,7 +24,7 @@ const ChatPage = () => {
       .catch((error) => {
         console.error('Error fetching data:', error);
       });
-  }, [id, messages]);
+  }, [id, updateSwitch]);
 
   const post = async (newData) => {
     try {
@@ -38,7 +39,8 @@ const ChatPage = () => {
     } catch (error) {
       console.error('Error adding data:', error);
     }
-  }
+    setUpdateSwitch(!updateSwitch);
+  };
 
   return (
     <>
